@@ -2,7 +2,7 @@ Ejecutable escrito en Python para comprobar si una página es vulnerable a click
 
 Lo descargamos y le damos permisos como ejecutable
 
-    git clone https://github.com/0xGh0s7m4n/Checker-Clickjacking.git    
+    git clone https://github.com/joepm21/Checker-Clickjacking.git    
     cd Checker-Clickjacking 
     chmod +x checker_clickjacking
     
