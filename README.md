@@ -215,7 +215,7 @@ Ejemplo:
 
 ## Ejemplo de salida en consola
 
-<img width="1032" height="601" alt="image" src="https://github.com/user-attachments/assets/96032f79-5c47-4413-88f4-faebfd7705b0" />
+<img width="962" height="603" alt="image" src="https://github.com/user-attachments/assets/ec00630f-f8f5-4c69-8d27-52f917cea8b0" />
 
 ---
 
