@@ -1,4 +1,4 @@
-# PVGUARD - Checker Clickjacking v2.0.0
+# PVGUARD - Checker Clickjacking
 
 **PVGUARD - Checker Clickjacking** es una herramienta escrita en Python para validar si una página web puede ser vulnerable a **Clickjacking**.
 
@@ -215,6 +215,10 @@ Ejemplo:
 
 ## Ejemplo de salida en consola
 
+v1.0
+<img width="924" height="337" alt="image" src="https://github.com/user-attachments/assets/491e4817-7526-4df3-9243-a01c78c7c8eb" />
+
+v2.0
 <img width="935" height="601" alt="image" src="https://github.com/user-attachments/assets/84e6a960-7f0d-4b53-86d9-0e75118629cc" />
 
 ---
