@@ -1,3 +1,5 @@
+Checker Clickjacking v1.0.0
+
 Ejecutable escrito en Python para comprobar si una página es vulnerable a clickjacking. Al ejecutarlo, validará si la página es vulnerable y se puede enmarcar en un HTML. Si es así, creará un archivo .html adjuntando la página vulnerable.
 
 Lo descargamos y le damos permisos como ejecutable
