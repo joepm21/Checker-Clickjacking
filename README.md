@@ -1,176 +1,120 @@
 # PVGUARD - Checker Clickjacking
 
-**PVGUARD - Checker Clickjacking** es una herramienta escrita en Python para validar si una página web puede ser vulnerable a **Clickjacking**.
-
-La herramienta analiza cabeceras de seguridad, verifica si existen controles contra carga en `iframe` y genera automáticamente una **PoC HTML interactiva** para demostrar el riesgo de forma visual en entornos autorizados.
-
----
+![Version](https://img.shields.io/badge/version-1.0%20%7C%202.0-brightgreen)
+![Python](https://img.shields.io/badge/python-3.x-blue)
+![Platform](https://img.shields.io/badge/platform-Kali%20Linux%20%7C%20Linux-black)
+![Uso](https://img.shields.io/badge/uso-autorizado-red)
 
 ## Descripción
 
-Clickjacking es una técnica de ataque donde un sitio legítimo puede ser cargado dentro de un `iframe` y superpuesto sobre una interfaz falsa para engañar al usuario y lograr que realice acciones no intencionadas.
+**PVGUARD - Checker Clickjacking** es una herramienta en Python diseñada para verificar si una aplicación web cuenta con protecciones contra ataques de **Clickjacking** y generar una **Prueba de Concepto (PoC)** en HTML.
 
-Esta herramienta permite identificar configuraciones inseguras relacionadas con Clickjacking mediante la revisión de cabeceras HTTP como:
+La herramienta analiza encabezados de seguridad como `X-Frame-Options` y `Content-Security-Policy: frame-ancestors`, y genera una demostración visual para evidenciar si el sitio puede ser embebido dentro de un `iframe`.
 
-- `X-Frame-Options`
-- `Content-Security-Policy`
-- Directiva `frame-ancestors`
+El proyecto incluye dos versiones principales:
 
-Cuando no se detectan protecciones adecuadas, PVGUARD genera una PoC HTML que permite visualizar el escenario de ataque mediante una capa señuelo y un `iframe` del sitio objetivo.
-
----
-
-## Características principales
-
-- Verificación de vulnerabilidad a Clickjacking.
-- Análisis de cabeceras HTTP de seguridad.
-- Validación de `X-Frame-Options`.
-- Validación de `Content-Security-Policy` con `frame-ancestors`.
-- Generación automática de PoC HTML.
-- PoC visual e interactiva en navegador.
-- Apertura automática de la PoC generada.
-- Soporte para múltiples plantillas de señuelo.
-- Control de opacidad del `iframe`.
-- Modo de solo verificación con `--check-only`.
-- Modo para omitir verificación de headers con `--no-check`.
-- Modo para no abrir automáticamente el navegador con `--no-open`.
-- Normalización automática de URL si no se indica `http://` o `https://`.
-- Banner actualizado con identidad PVGUARD.
+- **v1.0**: versión inicial por línea de comandos para generar una PoC básica de Clickjacking.
+- **v2.0**: versión mejorada, apertura automática de la PoC, análisis visual de headers, selector de plantillas y 20 templates diferentes.
 
 ---
 
-## Requisitos
+## Versiones
 
-- Python 3
-- Linux, Kali Linux o sistema compatible
-- Conexión a internet para analizar URLs externas
+### Checker Clickjacking v1.0
 
-La herramienta utiliza librerías estándar de Python, por lo que no requiere instalación adicional de dependencias externas.
+La primera versión permite generar una PoC HTML de Clickjacking indicando una URL objetivo desde la terminal.
 
-Módulos usados:
+Características principales:
 
-- `argparse`
-- `html`
-- `os`
-- `ssl`
-- `sys`
-- `urllib`
-- `webbrowser`
-- `datetime`
-- `pathlib`
+- Ejecución desde CLI.
+- Generación directa de PoC HTML.
+- Verificación básica de headers de seguridad.
+- Herramienta ligera y fácil de usar.
+- Enfocada en pruebas rápidas de Clickjacking.
 
----
-
-## Instalación
-
-Clonar el repositorio:
+Ejemplo de uso:
 
 ```bash
-git clone https://github.com/joepm21/Checker-Clickjacking.git
-```
-
-Entrar al directorio:
-
-```bash
-cd Checker-Clickjacking
-```
-
-Dar permisos de ejecución:
-
-```bash
-chmod +x checker_clickjacking
+./checker_clickjacking https://example.com
 ```
 
 ---
 
-## Uso básico
+### Checker Clickjacking v2.0
 
-Ejecutar análisis y generar PoC:
+La segunda versión incluye mejoras visuales, funcionales y de usabilidad para facilitar la generación de PoC y la presentación de evidencia.
+
+Características principales:
+
+
+- Análisis de encabezados de seguridad.
+- Detección de `X-Frame-Options`.
+- Detección de `Content-Security-Policy: frame-ancestors`.
+- Generación de reporte HTML interactivo.
+- Apertura automática de la PoC generada en el navegador.
+- Opción para evitar la apertura automática usando `--no-open`.
+- Control de opacidad del iframe víctima.
+- Botón para mostrar u ocultar el iframe.
+- Selector de plantillas dentro del HTML generado.
+- 20 templates diferentes para distintos escenarios de demostración.
+- Modo `--check-only` para verificar headers sin generar PoC.
+- Modo `--no-check` para generar la PoC sin validar headers.
+
+
+Ejemplo de uso:
 
 ```bash
-./checker_clickjacking -u https://ejemplo.com
+./checker_clickjacking -u https://example.com
 ```
 
-También puedes ejecutarlo con Python:
+Ejemplo usando una plantilla específica:
 
 ```bash
-python3 checker_clickjacking -u https://ejemplo.com
+./checker_clickjacking -u https://example.com --template banca
 ```
 
-Si la URL no incluye protocolo, la herramienta agregará automáticamente `http://`.
-
-Ejemplo:
+Ejemplo con opacidad personalizada:
 
 ```bash
-./checker_clickjacking -u ejemplo.com
+./checker_clickjacking -u https://example.com --template alerta --opacity 0.5
+```
+
+Ejemplo sin abrir automáticamente el navegador:
+
+```bash
+./checker_clickjacking -u https://example.com --no-open
 ```
 
 ---
 
-## Opciones disponibles
+## Templates disponibles
+
+La versión 2.0 incluye 20 plantillas distintas para simular diferentes escenarios de ingeniería social o interfaces señuelo durante una prueba autorizada.
 
 ```bash
-./checker_clickjacking -h
+premio
+login
+pago
+actualizacion
+newsletter
+encuesta
+cupon
+cloud
+soporte
+documento
+delivery
+calendario
+wifi
+banca
+mfa
+vpn
+capacitacion
+inventario
+alerta
+recompensa
 ```
 
-| Opción | Descripción |
-|---|---|
-| `-u`, `--url` | URL objetivo a analizar |
-| `-o`, `--output` | Nombre del archivo HTML de salida |
-| `--template` | Plantilla inicial para la PoC |
-| `--list-templates` | Lista las plantillas disponibles |
-| `--check-only` | Solo verifica cabeceras, no genera PoC |
-| `--opacity` | Define la opacidad inicial del iframe entre `0.0` y `1.0` |
-| `--no-check` | Omite la verificación de cabeceras |
-| `--no-open` | No abre automáticamente la PoC generada |
-
----
-
-## Ejemplos de uso
-
-### Analizar una URL y generar PoC
-
-```bash
-./checker_clickjacking -u https://ejemplo.com
-```
-
-### Generar PoC con nombre personalizado
-
-```bash
-./checker_clickjacking -u https://ejemplo.com -o poc_clickjacking.html
-```
-
-### Solo verificar cabeceras de seguridad
-
-```bash
-./checker_clickjacking -u https://ejemplo.com --check-only
-```
-
-### Generar PoC usando una plantilla específica
-
-```bash
-./checker_clickjacking -u https://ejemplo.com --template login
-```
-
-### Generar PoC con opacidad inicial del iframe
-
-```bash
-./checker_clickjacking -u https://ejemplo.com --template pago --opacity 0.5
-```
-
-### Generar PoC sin abrir el navegador automáticamente
-
-```bash
-./checker_clickjacking -u https://ejemplo.com --no-open
-```
-
-### Saltar verificación de headers y generar PoC directamente
-
-```bash
-./checker_clickjacking -u https://ejemplo.com --no-check
-```
-
-### Listar plantillas disponibles
+Para listar las plantillas disponibles:
 
 ```bash
 ./checker_clickjacking --list-templates
@@ -178,103 +122,88 @@ Ejemplo:
 
 ---
 
-## Plantillas disponibles
+## Instalación
 
-PVGUARD v2.0.0 incluye múltiples plantillas de señuelo para la PoC:
-
-| Template | Descripción |
-|---|---|
-| `premio` | Premio / Sorteo |
-| `login` | Inicio de sesión |
-| `pago` | Confirmación de pago |
-| `actualizacion` | Actualización requerida |
-| `newsletter` | Newsletter / Suscripción |
-| `encuesta` | Encuesta rápida |
-| `cupon` | Cupón descuento |
-| `cloud` | Almacenamiento cloud |
-| `soporte` | Ticket de soporte |
-| `documento` | Firma de documento |
-| `delivery` | Seguimiento delivery |
-| `calendario` | Invitación calendario |
-| `wifi` | Portal WiFi |
-| `banca` | Verificación bancaria |
-| `mfa` | Código MFA |
-| `vpn` | Portal VPN |
-| `capacitacion` | Capacitación interna |
-| `inventario` | Inventario TI |
-| `alerta` | Alerta de seguridad |
-| `recompensa` | Programa de recompensas |
-
-Ejemplo:
+Clona el repositorio:
 
 ```bash
-./checker_clickjacking -u https://ejemplo.com --template login
+git clone https://github.com/joepm21/Checker-Clickjacking.git
+cd Checker-Clickjacking
+```
+
+También puedes ejecutar el script directamente con Python 3 si no requiere dependencias externas adicionales:
+
+```bash
+python3 checker_clickjacking -h
 ```
 
 ---
 
-## Ejemplo de salida en consola
+## Uso general
 
-v1.0
-<img width="924" height="337" alt="image" src="https://github.com/user-attachments/assets/491e4817-7526-4df3-9243-a01c78c7c8eb" />
-
-v2.0
-<img width="935" height="601" alt="image" src="https://github.com/user-attachments/assets/84e6a960-7f0d-4b53-86d9-0e75118629cc" />
-
----
-
-## Archivo generado
-
-Por defecto, la herramienta genera:
+Ver ayuda:
 
 ```bash
-checker_clickjacking.html
+./checker_clickjacking -h
 ```
 
-Este archivo contiene:
+Analizar una URL y generar la PoC:
 
-- Información general del objetivo.
-- Resultado del análisis.
-- Estado de cabeceras HTTP.
-- Recomendaciones de remediación.
-- Demo interactiva de Clickjacking.
-- Selector de plantillas.
-- Control de opacidad del iframe.
-- Botón para mostrar u ocultar el iframe.
+```bash
+./checker_clickjacking -u https://example.com
+```
+
+Guardar el resultado con un nombre personalizado:
+
+```bash
+./checker_clickjacking -u https://example.com -o reporte_clickjacking.html
+```
+
+Verificar únicamente los headers:
+
+```bash
+./checker_clickjacking -u https://example.com --check-only
+```
+
+Generar PoC sin verificar headers:
+
+```bash
+./checker_clickjacking -u https://example.com --no-check
+```
 
 ---
 
-## Validaciones realizadas
+## Encabezados evaluados
 
-La herramienta revisa si la aplicación cuenta con mecanismos de defensa contra Clickjacking.
+La herramienta revisa principalmente los siguientes controles de seguridad:
 
 ### X-Frame-Options
 
-Se considera protección válida si se encuentra:
+Permite definir si un sitio puede ser cargado dentro de un `iframe`.
+
+Valores recomendados:
 
 ```http
 X-Frame-Options: DENY
 ```
 
-o:
+O:
 
 ```http
 X-Frame-Options: SAMEORIGIN
 ```
 
-### Content-Security-Policy
+### Content-Security-Policy: frame-ancestors
 
-Se revisa si la política CSP contiene la directiva:
+Control moderno para restringir qué orígenes pueden embeber el sitio.
 
-```http
-frame-ancestors
-```
-
-Ejemplos seguros:
+Ejemplo recomendado:
 
 ```http
 Content-Security-Policy: frame-ancestors 'none';
 ```
+
+O, si solo se permite el mismo dominio:
 
 ```http
 Content-Security-Policy: frame-ancestors 'self';
@@ -282,91 +211,35 @@ Content-Security-Policy: frame-ancestors 'self';
 
 ---
 
-## Recomendaciones de remediación
+## Recomendación de remediación
 
-Para mitigar Clickjacking, se recomienda implementar una de las siguientes configuraciones.
+Si la aplicación permite ser cargada dentro de un `iframe` sin restricciones, se recomienda implementar controles de seguridad a nivel de encabezados HTTP.
 
-### Bloquear completamente el uso en iframes
+Configuración recomendada:
 
 ```http
 X-Frame-Options: DENY
-```
-
-o:
-
-```http
 Content-Security-Policy: frame-ancestors 'none';
 ```
 
-### Permitir iframes solo desde el mismo origen
+En aplicaciones donde sea necesario permitir `iframe` para dominios específicos, se debe usar una política restrictiva y explícita:
 
 ```http
-X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors 'self' https://dominio-autorizado.com;
 ```
-
-o:
-
-```http
-Content-Security-Policy: frame-ancestors 'self';
-```
-
-### Configuración recomendada moderna
-
-```http
-Content-Security-Policy: frame-ancestors 'none';
-```
-
-La directiva `frame-ancestors` es la opción más flexible y moderna para controlar qué sitios pueden embeber una aplicación dentro de un frame.
 
 ---
 
-## Cambios en v2.0.0
+## Casos de uso
 
-- Generación automática de PoC HTML mejorada.
-- Interfaz HTML más profesional para la PoC.
-- Inclusión de veredicto visual de vulnerabilidad.
-- Análisis de `X-Frame-Options`.
-- Análisis de `Content-Security-Policy`.
-- Revisión de `frame-ancestors`.
-- Múltiples plantillas de señuelo.
-- Selector dinámico de plantillas dentro de la PoC.
-- Control de opacidad del iframe.
-- Botón para mostrar u ocultar el iframe.
-- Opción `--check-only`.
-- Opción `--no-check`.
-- Opción `--no-open`.
-- Opción `--list-templates`.
-- Opción `--template`.
-- Opción `--opacity`.
-- Apertura automática de la PoC generada en navegador.
-- Mejoras en la salida por consola.
-- Recomendaciones de remediación dentro del HTML generado.
-- Aviso legal integrado en la PoC.
+Esta herramienta puede ser utilizada en:
 
----
-
-## Versiones
-
-| Versión | Descripción |
-|---|---|
-| `v1.0.0` | Primera versión funcional para validar Clickjacking y generar HTML básico |
-| `v2.0.0` | Versión mejorada con PVGUARD, múltiples plantillas, análisis de headers y PoC interactiva |
-
----
-
-## Uso ético
-
-Esta herramienta debe utilizarse únicamente en:
-
-- Laboratorios propios.
-- Entornos de práctica.
-- Auditorías internas autorizadas.
-- Pruebas de penetración con permiso explícito.
-- Programas de bug bounty donde la prueba esté permitida.
-
-El uso no autorizado contra sistemas de terceros puede ser ilegal.
-
-El autor no se hace responsable por el uso indebido de esta herramienta.
+- Pruebas de penetración web autorizadas.
+- Laboratorios de seguridad.
+- Programas de Bug Bounty donde el alcance lo permita.
+- Validación de headers de seguridad.
+- Generación de evidencia para reportes técnicos.
+- Demostraciones controladas sobre ataques de Clickjacking.
 
 ---
 
@@ -374,14 +247,10 @@ El autor no se hace responsable por el uso indebido de esta herramienta.
 
 **Gh0s7m4n**  
 
-Repositorio:
-
-```text
-https://github.com/joepm21/Checker-Clickjacking
-```
-
 ---
 
-## Licencia
+## Aviso legal
 
-Proyecto publicado con fines educativos, de investigación y pruebas de seguridad autorizadas.
+Esta herramienta debe utilizarse únicamente en entornos autorizados, laboratorios propios, pruebas de penetración con permiso o programas de Bug Bounty donde la prueba esté permitida.
+
+El uso no autorizado contra sistemas de terceros puede constituir una actividad ilegal. El autor no se responsabiliza por el uso indebido de esta herramienta.
