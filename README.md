@@ -3,7 +3,7 @@
 ![Version](https://img.shields.io/badge/version-1.0%20%7C%202.0-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.x-blue)
 ![Uso](https://img.shields.io/badge/uso-autorizado-red)
-![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-black)
+
 
 ## Descripción
 
